@@ -6,7 +6,7 @@ var ggs = require('gulp-git-sftp'),
  
 var FTP = ggs.ftp(CNF);
  
-module.exports = function() {
+exports.task = function() {
     
     console.log('CNF:', CNF)
     
