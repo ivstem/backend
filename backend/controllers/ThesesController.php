@@ -8,6 +8,7 @@ use app\models\ThesesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ThesesController implements the CRUD actions for Theses model.
@@ -24,6 +25,17 @@ class ThesesController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'delete', 'update'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'delete', 'update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

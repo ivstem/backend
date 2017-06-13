@@ -78,4 +78,16 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Логін',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запам\'ятати мене',
+        ];
+    }
 }

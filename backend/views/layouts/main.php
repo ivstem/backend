@@ -68,7 +68,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; Плагіат <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">Розроблено студентом <a href="http://ivstem.kpi.ua" target="_blank">ІВСТЕМ</a></p>
     </div>
 </footer>
 
