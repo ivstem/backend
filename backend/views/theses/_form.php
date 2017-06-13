@@ -13,12 +13,16 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'subject')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'npp')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'group')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'curator')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'doc')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

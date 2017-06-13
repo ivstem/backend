@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "theses".
  *
  * @property int $id
+ * @property string $npp
  * @property string $subject
  * @property string $author
  * @property string $curator
@@ -29,9 +30,9 @@ class Theses extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subject', 'author', 'curator', 'doc'], 'required'],
+            [['subject', 'author', 'curator', 'doc', 'group'], 'required'],
             [['doc'], 'string'],
-            [['subject', 'author', 'curator'], 'string', 'max' => 255],
+            [['subject', 'author', 'curator', 'npp', 'group'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,10 +43,13 @@ class Theses extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'subject' => 'Subject',
-            'author' => 'Author',
-            'curator' => 'Curator',
-            'doc' => 'Doc',
+            'npp' => 'Інвент. номер',
+            'subject' => 'Тема',
+            'group' => 'Група',
+            'author' => 'Автор',
+            'curator' => 'Куратор',
+            'doc' => 'Текст',
+            'body' => 'Body',
         ];
     }
 }

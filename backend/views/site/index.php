@@ -9,7 +9,10 @@ $this->title = 'My Yii Application';
     <div class="jumbotron">
         <h1>Адміністративна частина!</h1>
 
-        <p class="lead">Дипломної магістерської роботи Кушніра В.В.</p>
+        <p class="lead">
+            Дипломної магістерської роботи 
+            <a href="https://linkedin.com/in/slaawwa" target="_blank">Кушніра В.В.</a>
+        </p>
 
     </div>
 
@@ -22,13 +25,14 @@ $this->title = 'My Yii Application';
                 <!--<p>Трелло</p>-->
 
                 <p><a class="btn btn-default" href="https://trello.com/b/cRS3nvTb/plagiat" target="_blank">Trello &raquo;</a></p>
+                <p><a class="btn btn-default" href="https://trello.com/b/cRS3nvTb/plagiat" target="_blank">Issues &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Репозиторій</h2>
 
                 <!--<p></p>-->
 
-                <p><a class="btn btn-default" href="https://github.com/ivstem/backend" target="_blank">Git &raquo;</a></p>
+                <p><a class="btn btn-default" href="https://github.com/ivstem/backend/issues" target="_blank">Git &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Клієнтаська частина</h2>

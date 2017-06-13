@@ -19,7 +19,7 @@ class ThesesSearch extends Theses
     {
         return [
             [['id'], 'integer'],
-            [['subject', 'author', 'curator', 'body'], 'safe'],
+            [['subject', 'npp', 'author', 'curator', 'group', 'doc', 'body'], 'safe'],
         ];
     }
 
@@ -47,6 +47,9 @@ class ThesesSearch extends Theses
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => ['id' => SORT_DESC]
+            ],
         ]);
 
         $this->load($params);
@@ -65,6 +68,8 @@ class ThesesSearch extends Theses
         $query->andFilterWhere(['like', 'subject', $this->subject])
             ->andFilterWhere(['like', 'author', $this->author])
             ->andFilterWhere(['like', 'curator', $this->curator])
+            ->andFilterWhere(['like', 'group', $this->group])
+            ->andFilterWhere(['like', 'doc', $this->curator])
             ->andFilterWhere(['like', 'body', $this->body]);
 
         return $dataProvider;
