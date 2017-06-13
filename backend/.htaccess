@@ -1,0 +1,20 @@
+# prevent directory listings
+Options -Indexes
+IndexIgnore */*
+
+# follow symbolic links
+# Options FollowSymlinks
+RewriteEngine on
+# RewriteRule ^gulp(/.*)?$ trash/gulp-site/$1 [L,PT]
+# RewriteRule ^base(/.*)?$ trash/basic/$1 [L,PT]
+# RewriteRule ^admin$ dev/backend/web/index.php$1 [L,PT]
+# RewriteRule ^phpsqliteadmin(/.*)?$ phpsqliteadmin/$1 [L,PT]
+# RewriteRule ^adminka/db/(.*)?$ phpsqliteadmin/$1 [L,PT]
+# RewriteRule ^adminka(/.*)?$ dev/backend/web/$1 [L,PT]
+# RewriteRule ^chrome$ dev/frontend/web/ [L,PT]
+# RewriteRule ^chrome(/{0,1})$ http://%{HTTP_HOST}/key/chrome [L,R=301]
+RewriteRule ^(.*)?$ web/$1 [L,PT]
+# RewriteRule . dev/backend/web/index.php$1 [L,PT]
+# RewriteRule ^(.+)?$ phpsqliteadmin/$1
+
+AddDefaultCharset UTF-8

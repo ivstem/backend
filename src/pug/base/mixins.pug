@@ -1,0 +1,15 @@
+mixin addText(text1, ...text2)
+    h2= text1
+    h3= text2
+
+mixin style(...files)
+    each file in files
+        link(rel="stylesheet", href=file)
+
+mixin scriptArr(files)
+    each file in files
+        script(src=file)
+        
+mixin script(...files)
+    each file in files
+        script(src=file)

@@ -1,0 +1,42 @@
+//- layout.pug
+include mixins
+
+
+block vars
+    include _vars
+    
+doctype html
+html(ng-app="app" ng-controller="AppCtrl as App" ng-strict-di ng-cloak ng-class="bodyClass" lang="ua")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+
+        block title
+            if (title)
+                //- title(ng-bind="title") #{siteName}
+                title #{title} &bullet; #{siteName}
+            else
+                title #{siteName} 
+
+        //- include head.pug
+        block headBlock
+            include _head.pug
+            block head
+
+        block endHead
+            
+    body(ng-class="loaded? bodyClass: 'isLoading'" ng-controller="MainCtrl as Main")
+        //- div.container
+        
+        +scriptArr(scripts)
+
+        block header
+            include _header.pug
+
+        block content
+
+        block footer
+            include _footer.pug
+
+        include _endBody.pug
+        block endBody

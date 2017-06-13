@@ -1,0 +1,26 @@
+{
+  "name": "plagiat",
+  "description": "plagiat naeps diploma",
+  "main": "index.js",
+  "authors": [
+    "slaawwa@i.ua <Viacheslav.Kushnir>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "plagiat",
+    "naeps",
+    "diploma"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/static/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
