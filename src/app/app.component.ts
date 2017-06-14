@@ -22,8 +22,8 @@ import { AppState } from './app.service';
 })
 export class AppComponent implements OnInit {
   public angularclassLogo = 'assets/img/angularclass-avatar.png';
-  public name = 'Angular 2 Webpack Starter';
-  public url = 'https://twitter.com/AngularClass';
+  public name = 'Plagiat checker';
+  public url = 'http://ivstem.kpi.ua';
 
   constructor(
     public appState: AppState
