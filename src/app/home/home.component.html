@@ -1,23 +1,48 @@
-<div>
-  
-  <div>
-    <h4>Текст для перевірки:</h4>
 
-    <form (ngSubmit)="submitState(localState.value)" autocomplete="off">
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
 
-      <textarea
-        [value]="localState.value"
-        (input)="localState.value = $event.target.value"
-        name=""
-        placeholder="Перевірте Ваш текст тут"
-        autofocus
-      ></textarea>
-      <br>
+        <strong>Текст для перевірки:</strong>
 
-      <button>Перевірити</button>
-      
-    </form>
+        <form (ngSubmit)="submitState(localState.value)" autocomplete="off">
 
-  </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <textarea
+                    [value]="localState.value"
+                    (input)="localState.value = $event.target.value"
+                    autofocus 
+                    class="mdl-textfield__input" 
+                    type="text" 
+                    rows="7" 
+                    id="sample5"
+                ></textarea>
+                <label class="mdl-textfield__label" for="sample5">Перевірте Ваш текст тут...</label>
+            </div>
+            <br>
+          
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Перевірити
+            </button>
+            <br>
+            <br>
 
+            <div>
+                
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    &#9654; / &#9208;
+                </button>
+              
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    &#9209;
+                </button>
+          
+            </div>
+
+        </form>
+
+    </div>
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet">
+        <strong>Статистика:</strong>
+    </div>
 </div>
+
