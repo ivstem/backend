@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Theses;
+// use app\models\Plagiat;
 use app\models\ThesesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -63,8 +64,19 @@ class ThesesController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'plagiat' => $model->plagiat()
+        ]);
+    }
+    
+    public function actionField($id, $field)
+    {
+        $model = $this->findModel($id);
+        return $this->render('field', [
+            'model' => $model,
+            'field' => $field,
         ]);
     }
 
@@ -115,21 +127,48 @@ class ThesesController extends Controller
 
         if ($model && $model->doc2body() && $model->save()) {
             Yii::$app->session->setFlash('success', 'Set body!');
-            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             Yii::$app->session->setFlash('danger', "Error #987! Cant doc2body or save (ThesesID: {$model->id})!");
-            return $this->redirect(['view', 'id' => $model->id]);
         }
+        return $this->redirect(['view', 'id' => $model->id]);
     }
     public function actionGetbodyall()
     {
-        $all = Theses::find()->all();
-        foreach ($all as $key => $value) {
-            $body = $value->doc2body();
-            $value->save();
+        $all_theses = Theses::find()->all();
+        foreach ($all_theses as $these) {
+            if ($these->doc2body()) {
+                $these->save();
+            } else {
+                Yii::$app->session->setFlash('danger', "Error #988! (these.id: {$these->id})");
+            }
         }
         Yii::$app->session->setFlash('success', 'All DOCS set BODY!');
         return $this->redirect(['index']);
+    }
+    
+    public function actionCheckall($force=false)
+    {
+        $all_theses = Theses::find()->all();
+        foreach ($all_theses as $key => $these) {
+            if ($these->canCheck()) {
+                $res = $these->checkWithGTid($force);
+            } else {
+                if (Yii::$app->session->hasFlash('danger')) {
+                    $err = Yii::$app->session->getFlash('danger') . ", {$these->id}";
+                } else {
+                    $err = "Error #988! These.id: {$these->id}";
+                }
+                Yii::$app->session->setFlash('danger', $err);
+            }
+        }
+        Yii::$app->session->setFlash('success', 'Готово!');
+        return $this->redirect(['index']);
+    }
+    
+    public function actionCheckbyid($id, $force=false) {
+        $these = Theses::findOne($id);
+        $res = $these->checkThese($force);
+        return $this->redirect(['view', 'id'=>$id]);
     }
 
     /**

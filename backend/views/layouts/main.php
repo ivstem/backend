@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Плагіат',
+        'brandLabel' => 'Плагіатор',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -46,7 +46,7 @@ AppAsset::register($this);
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Вийти (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -77,7 +77,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Плагіат <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Плагіатор <?= date('Y') ?></p>
 
         <p class="pull-right">Розроблено студентом <a href="http://ivstem.kpi.ua" target="_blank">ІВСТЕМ</a></p>
     </div>

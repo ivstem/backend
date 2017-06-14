@@ -17,11 +17,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Створити роботу', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Підготувати', ['getbodyall'], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Перевірити', ['checkall'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Перевірити+', ['checkall', 'force' => true], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function($m){
+            if($m->canCheck()){
+                return ['class' => 'success'];
+            }
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

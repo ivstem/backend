@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Works */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Works', 'url' => ['index']];
+$this->title = "ID: {$model->id}";
+$this->params['breadcrumbs'][] = ['label' => 'Роботи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="works-view">
@@ -15,15 +15,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Редагувати', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Видалити', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Підтвертіть видалення?',
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Get body', ['getbody', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+        <? $canCheck = $model->canCheck()? '+': '-' ?>
+        <?= Html::a("Оновити текст перевірки ($canCheck)", ['getbody', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Перевірити', ['checkbyid', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Перевірити+', ['checkbyid', 'id' => $model->id, 'force' => true], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -35,9 +38,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'group',
             'author',
             'curator',
-            'doc:ntext',
-            'body:ntext',
+            [
+                'attribute' => 'doc',
+                'format' => 'raw',
+                'value' => function($m) {
+                    return "<a href='/backend/theses/field?id={$m->id}&field=doc' class='btn btn-default'>Документ</a>";
+                },
+            ],
+            [
+                'attribute' => 'body',
+                'format' => 'raw',
+                'value' => function($m) {
+                    return "<a href='/backend/theses/field?id={$m->id}&field=body' class='btn btn-default'>Підготовлений текст</a>";
+                },
+            ],
         ],
+    ]) ?>
+    
+    <?= $this->render('_plagiat', [
+        'model' => $model,
+        'plagiat' => $plagiat,
     ]) ?>
 
 </div>

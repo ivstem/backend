@@ -30,7 +30,7 @@ const ngcWebpack = require('ngc-webpack');
 const HMR = helpers.hasProcessFlag('hot');
 const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
 const METADATA = {
-  title: 'Plagiat &bullet; kpi2day  &bullet; IVSTEM',
+  title: 'Плагіатор &bullet; kpi2day  &bullet; IVSTEM',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
   HMR: HMR

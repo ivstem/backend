@@ -22,7 +22,7 @@ import { AppState } from './app.service';
 })
 export class AppComponent implements OnInit {
   public angularclassLogo = 'assets/img/angularclass-avatar.png';
-  public name = 'Plagiat checker';
+  public name = 'Плагіатор';
   public url = 'http://ivstem.kpi.ua';
 
   constructor(
