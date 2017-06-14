@@ -106,6 +106,33 @@ class ThesesController extends Controller
     }
 
     /**
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionGetbody($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model && $model->doc2body() && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Set body!');
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            Yii::$app->session->setFlash('danger', "Error #987! Cant doc2body or save (ThesesID: {$model->id})!");
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+    }
+    public function actionGetbodyall()
+    {
+        $all = Theses::find()->all();
+        foreach ($all as $key => $value) {
+            $body = $value->doc2body();
+            $value->save();
+        }
+        Yii::$app->session->setFlash('success', 'All DOCS set BODY!');
+        return $this->redirect(['index']);
+    }
+
+    /**
      * Deletes an existing Theses model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id

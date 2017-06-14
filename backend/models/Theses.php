@@ -23,6 +23,29 @@ class Theses extends \yii\db\ActiveRecord
     {
         return 'theses';
     }
+    
+    /**
+     * @doc2body
+     */
+    static function _doc2body($doc) {
+        $body = mb_strtolower($doc, 'UTF-8');
+        $pattern = '[^A-Za-zА-Яа-яіІєЄїЇґҐ0-9]';
+        $body = mb_ereg_replace($pattern, ' ', $body);
+        $body = preg_replace('/\s+/', ' ', trim($body));
+        return $body;
+    }
+    
+    /**
+     * @doc2body
+     */
+    public function doc2body()
+    {
+        $body = Theses::_doc2body($this->doc);
+        if ($body) {
+            $this->body = $body;
+        }
+        return $body;
+    }
 
     /**
      * @inheritdoc
