@@ -2,7 +2,7 @@
 
 $params = require(__DIR__ . '/params.php');
 
-$baseUrl = str_replace('/backend/web', '/api', (new \yii\web\Request)->getBaseUrl());
+$baseUrl = str_replace('/backend/web', '/backend', (new \yii\web\Request)->getBaseUrl());
 
 $config = [
     'id' => 'basic',

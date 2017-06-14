@@ -49,6 +49,10 @@ a.active {
     margin-bottom: 80px;
 }
 
+.mdl-textfield {
+    width: 100%;
+}
+
 .demo-layout.is-small-screen .demo-content {
     padding: 40px 28px;
 }
