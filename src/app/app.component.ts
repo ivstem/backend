@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import { AppState } from './app.service';
+// import { AppState } from './app.service';
 
 /**
  * App Component
@@ -26,11 +26,11 @@ export class AppComponent implements OnInit {
   public url = 'http://ivstem.kpi.ua';
 
   constructor(
-    public appState: AppState
+    // public appState: AppState
   ) {}
 
   public ngOnInit() {
-    console.log('Initial App State', this.appState.state);
+    // console.log('Initial App State', this.appState.state);
   }
 
 }

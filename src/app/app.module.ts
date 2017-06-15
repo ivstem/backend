@@ -23,7 +23,7 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, CheckService, InternalStateType } from './app.service';
+import {/* AppState,*/ CheckService/*, InternalStateType*/ } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
@@ -35,12 +35,12 @@ import '../styles/headings.css';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState,
+  // AppState,
   CheckService,
 ];
 
 type StoreType = {
-  state: InternalStateType,
+  // state: InternalStateType,
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
@@ -78,18 +78,18 @@ export class AppModule {
 
   constructor(
     public appRef: ApplicationRef,
-    public appState: AppState
+    // public appState: AppState
   ) {}
 
   public hmrOnInit(store: StoreType) {
-    if (!store || !store.state) {
+    if (!store/* || !store.state*/) {
       return;
     }
     console.log('HMR store', JSON.stringify(store, null, 2));
     /**
      * Set state
      */
-    this.appState._state = store.state;
+    // this.appState._state = store.state;
     /**
      * Set input values
      */
@@ -99,7 +99,7 @@ export class AppModule {
     }
 
     this.appRef.tick();
-    delete store.state;
+    // delete store.state;
     delete store.restoreInputValues;
   }
 
@@ -108,8 +108,8 @@ export class AppModule {
     /**
      * Save state
      */
-    const state = this.appState._state;
-    store.state = state;
+    // const state = this.appState._state;
+    // store.state = state;
     /**
      * Recreate root elements
      */

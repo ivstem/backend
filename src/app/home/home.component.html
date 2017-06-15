@@ -4,7 +4,7 @@
 
         <strong>Текст для перевірки:</strong>
 
-        <form (ngSubmit)="submitState(localState.value)" autocomplete="off">
+        <form (ngSubmit)="submitState()" autocomplete="off">
 
             <div class="mdl-textfield mdl-js-textfield">
                 <textarea
@@ -13,7 +13,7 @@
                     autofocus 
                     class="mdl-textfield__input" 
                     type="text" 
-                    placeholder="Перевірте Ваш текст тут..." 
+                    placeholder="Вставте Ваш текст сюди..." 
                     rows="7" 
                     id="sample5"
                 ></textarea>
@@ -21,43 +21,72 @@
             </div>
             <br>
           
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            <button 
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                [disabled]="localState.id && localState.index"
+                >
                 Перевірити
             </button>
           
+            
             <button 
-                type="button" 
                 class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                (click)="getID()"
-                > ID ({{ appState.state.id }})
+                type="button" 
+                (click)="go()"
+                [disabled]="!localState.id || localState.index == 0"
+                >
+                <span *ngIf="localState.play">&#9208;</span>
+                <span *ngIf="!localState.play">&#9654;</span>
             </button>
           
-            <button 
-                type="button" 
+            <button
                 class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                (click)="setID()"
-                > set ID
+                type="button" 
+                (click)="stop()"
+                [disabled]="!localState.play && !localState.index"
+                >
+                &#9209;
             </button>
-            <br>
-            <br>
-
-            <div>
-                
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                    &#9654; / &#9208;
-                </button>
-              
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                    &#9209;
-                </button>
-          
-            </div>
 
         </form>
 
     </div>
     <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet">
-        <strong>Статистика:</strong>
+        <strong>
+            Статистика: 
+            <span *ngIf="localState.id">
+                {{localState.all.length - localState.resEmpty}} / {{localState.all.length}}
+            </span>
+            <small *ngIf="!localState.id">відсутня</small>
+        </strong>
+        <ul class='list'>
+          <li *ngFor="let plagiat of localState.res" [ngClass]="{'hide': !plagiat.percent}">
+            <div *ngIf="plagiat.percent">
+                <button
+                    type="button"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn-item"
+                    (click)="plagiat.open = !plagiat.open"
+                    [ngClass]="{'mdl-button--colored': plagiat.percent > 10}"
+                    title="Інвентаризаційний номер: {{plagiat.theseNPP}}"
+                    >
+                    <strong>Робота#{{plagiat.theseID}}</strong>
+                     - <em>{{plagiat.percent}}</em>%
+                </button>
+                <div *ngIf="plagiat.open" class="dropdown-item">
+                    <span>Слів у шинглі 1: <strong>{{plagiat.per[0]}}</strong>%</span>
+                    <br>
+                    <span>Слів у шинглі 2: <strong>{{plagiat.per[1]}}</strong>%</span>
+                    <br>
+                    <span>Слів у шинглі 3: <strong>{{plagiat.per[2]}}</strong>%</span>
+                    <br>
+                    <span>Слів у шинглі 4: <strong>{{plagiat.per[3]}}</strong>%</span>
+                </div>
+            </div>
+          </li>
+        </ul>
     </div>
+
+    <div id="progress-bar" class="mdl-progress mdl-js-progress"></div>
+
 </div>
 
