@@ -7,24 +7,12 @@
     ----------------------------------------------------------------- 
 
 
-Hi there! Welcome to Cloud9 IDE!
+# Дипломна робота
 
-To get you started, we have created a small hello world application.
+#### Технологічний стек:
 
-1) Open the hello-world.php file
-
-2) Follow the run instructions in the file's comments
-
-3) If you want to look at the Apache logs, check out ~/lib/apache2/log
-
-And that's all there is to it! Just have fun. Go ahead and edit the code, 
-or add new files. It's all up to you! 
-
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+  - Backend: PHP, Yii2
+  - DataBase: MySQL
+  - Front адмінка: Bootstrap + jQuery
+  - Front клієнт: MaterialDesignLight + Angular2
+  - DevTools: gulp + webpack2 + cloud9IDE
