@@ -179,7 +179,11 @@ class ThesesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        
+        $model->deletePlagiat();
+        
+        $model->delete();
 
         return $this->redirect(['index']);
     }

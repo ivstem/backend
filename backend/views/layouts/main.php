@@ -34,25 +34,28 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    $menu = [
+        ['label' => 'Головна', 'url' => ['/site/index']]
+    ];
+    if (Yii::$app->user->isGuest) {
+        $menu[] = ['label' => 'Вхід', 'url' => ['/site/login']];
+        // ['label' => 'Роботи перевірки', 'url' => ['/check']],
+        // ['label' => 'Контакт', 'url' => ['/site/contact']],
+    } else {
+        $menu[] = ['label' => 'Роботи студентів', 'url' => ['/theses']];
+        $menu[] = ['label' => 'Роботи перевірки', 'url' => ['/check']];
+        $menu[] = '<li>'
+            . Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton(
+                'Вийти (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+        . '</li>';
+    }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Головна', 'url' => ['/site/index']],
-            ['label' => 'Роботи студентів', 'url' => ['/theses']],
-            // ['label' => 'Контакт', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Вхід', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Вийти (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
+        'items' => $menu,
     ]);
     NavBar::end();
     ?>

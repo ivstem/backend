@@ -60,6 +60,12 @@ class Theses extends \yii\db\ActiveRecord
         return strlen($this->body) > 15;
     }
     
+    public function deletePlagiat() {
+        Plagiat::deleteAll('id1 = :id1 OR id2 = :id2', [
+            ':id1' => $this->id, 
+            ':id2' => $this->id
+        ]);
+    }
     public function plagiat() {
         $plagiat = Plagiat::find()
             ->orWhere(['id1' => $this->id])
@@ -76,12 +82,10 @@ class Theses extends \yii\db\ActiveRecord
         foreach ($all as $key => $these) {
             if ($these->canCheck()) {
                 $res = Plagiat::getByThese($this->id, $these->id);
-                /*var_dump('$res');
-                var_dump($res);*/
                 if (!$res || $force) {
+                    $update = $res? true: false;
                     $res = Theses::check($this->body, $these->body);
-                    $res = Plagiat::saveRes($this->id, $these->id, $res);
-                    // var_dump($res);
+                    $res = Plagiat::saveRes($this->id, $these->id, $res, $update);
                 }
                 $_all[] = $res->info();
             }
@@ -98,8 +102,6 @@ class Theses extends \yii\db\ActiveRecord
             foreach ($all as $key => $these) {
                 if ($these->canCheck()) {
                     $res = Plagiat::getByThese($this->id, $these->id);
-                    /*var_dump($res);
-                    var_dump($force);*/
                     if (!$res || $force) {
                         $update = $res? true: false;
                         $res = Theses::check($this->body, $these->body);

@@ -6,6 +6,8 @@ use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\rest\ActiveController;
+use app\models\Check;
+use app\models\Theses;
 
 class ThesesController extends ActiveController
 {
@@ -63,4 +65,50 @@ class ThesesController extends ActiveController
         print_r(Yii::$app->request->post());
         // return $this->render('index');
     }*/
+
+    public function actionSetcheck()
+    {
+        $_post = Yii::$app->request->post();
+        $doc = $_post['doc'];
+        if (!$doc) {
+            return [];
+        }
+        $id = $_post['id'];
+        if ($id) {
+            $ch = Check::findOne($id);
+            $ch->doc = $doc;
+            $ch->body = Theses::_doc2body($doc);
+        } else {
+            $ch = new Check([
+                'doc' => $doc,
+                'body' => Theses::_doc2body($doc), 
+                'created' => time(),
+            ]);
+        }
+        $ch->save();
+        return $ch;
+    }
+
+    public function actionGetcheck()
+    {
+        $_post = Yii::$app->request->post();
+        $text = Check::findOne($_post['id']);
+        return [
+            'doc' => $text->doc,
+        ];
+    }
+    
+    public function actionGetall($check=true)
+    {
+        $_all = Theses::find()
+            ->select('id, body')
+            ->all();
+        $all = [];
+        foreach ($_all as $th) {
+            if ($th->canCheck()) {
+                $all[] = $th->id;
+            }
+        }
+        return $all;
+    }
 }
