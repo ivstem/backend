@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CheckSearch */
@@ -9,6 +10,15 @@ use yii\grid\GridView;
 
 $this->title = 'Checks';
 $this->params['breadcrumbs'][] = $this->title;
+    // "$('#myButton').on('click', function() { alert('Button clicked!'); });",
+$this->registerJs(
+    "$('.btn-edit').on('click', function() { 
+        localStorage.edit = $(this).data('id');
+        location.href = '/';
+    });",
+    View::POS_READY,
+    'my-button-handler'
+);
 ?>
 <div class="check-index">
 
@@ -29,6 +39,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'doc:ntext',
             'body:ntext',
             'created:datetime',
+            [
+                'label' => 'Дії',
+                'format' => 'raw',
+                'value' => function($m) {
+                    return "<button class='btn btn-default btn-edit' data-id='{$m->id}'>Клієнт</button>";
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
