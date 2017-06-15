@@ -4,6 +4,8 @@ import {
 } from '@angular/core';
 
 import { AppState } from '../app.service';
+import { CheckService } from '../app.service';
+import { Check } from '../check';
 import { Title } from './title';
 import { XLargeDirective } from './x-large';
 
@@ -33,14 +35,25 @@ export class HomeComponent implements OnInit {
   /**
    * Set our default values
    */
-  public localState = { value: '' };
+  public localState = { 
+      value: '', 
+      id: null,
+      all: <Check[]> [],
+  };
   /**
    * TypeScript public modifiers
    */
   constructor(
     public appState: AppState,
-    public title: Title
-  ) {}
+    public title: Title,
+    public api: CheckService,
+  ) {
+      this.api.getAll()
+          .then(res => {
+              this.localState.all = res;
+              console.log('res:', res);
+          });
+  }
 
   public ngOnInit() {
     console.log('hello `Home` component');
@@ -53,5 +66,22 @@ export class HomeComponent implements OnInit {
     console.log('submitState', value);
     this.appState.set('value', value);
     this.localState.value = '';
+  }
+  public getID() {
+      var res = +prompt('ID check entity:', '');
+      console.info('ID', res)
+      this.appState.set('id', res);
+      this.localState.id = res;
+      var r = this.api.getByID(res);
+      r.then(res => {
+          console.info('CheckService', res);
+          this.localState.value = res.doc;
+      });
+  }
+  public setID() {
+      var r = this.api.setByID(this.localState.value, this.localState.id);
+      r.then(res => {
+          console.info('api', res);
+      });
   }
 }

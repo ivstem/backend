@@ -13,15 +13,30 @@
                     autofocus 
                     class="mdl-textfield__input" 
                     type="text" 
+                    placeholder="Перевірте Ваш текст тут..." 
                     rows="7" 
                     id="sample5"
                 ></textarea>
-                <label class="mdl-textfield__label" for="sample5">Перевірте Ваш текст тут...</label>
+                <label class="mdl-textfield__label" for="sample5"></label>
             </div>
             <br>
           
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                 Перевірити
+            </button>
+          
+            <button 
+                type="button" 
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                (click)="getID()"
+                > ID ({{ appState.state.id }})
+            </button>
+          
+            <button 
+                type="button" 
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                (click)="setID()"
+                > set ID
             </button>
             <br>
             <br>
