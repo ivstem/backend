@@ -8,6 +8,7 @@ use yii\filters\AccessControl;
 use yii\rest\ActiveController;
 use app\models\Check;
 use app\models\Theses;
+use app\models\Plagiat;
 
 class ThesesController extends ActiveController
 {
@@ -86,7 +87,7 @@ class ThesesController extends ActiveController
             ]);
         }
         $ch->save();
-        return $ch;
+        return ['id' => $ch->id];
     }
 
     public function actionGetcheck()
@@ -96,6 +97,22 @@ class ThesesController extends ActiveController
         return [
             'doc' => $text->doc,
         ];
+    }
+
+    public function actionGetplagiat()
+    {
+        $_post = Yii::$app->request->post();
+        $check = Check::findOne($_post['checkID']);
+        $these = Theses::findOne($_post['id']);
+        $res = ['success' => false];
+        if ($check && $these) {
+            $res = Theses::check($check->body, $these->body);
+            $res = Plagiat::_info($res);
+            $res['theseID'] = $these->id;
+            $res['theseNPP'] = $these->npp;
+            $res['success'] = true;
+        };
+        return $res;
     }
     
     public function actionGetall($check=true)

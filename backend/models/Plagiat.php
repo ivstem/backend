@@ -81,8 +81,8 @@ class Plagiat extends \yii\db\ActiveRecord
         return $plagiat;
     }
 
-    public function info($level='base') {
-        $per = [$this->per1, $this->per2, $this->per3, $this->per4];
+    static function _info($res) {
+        $per = [$res['per1'], $res['per2'], $res['per3'], $res['per4']];
         $average = array_sum($per) * .25;
         $res = [
             'average' => $average,
@@ -95,6 +95,17 @@ class Plagiat extends \yii\db\ActiveRecord
                 round($per[3] * 100, 2),
             ],
         ];
+        return $res;
+    }
+    
+    public function info($level='base') {
+        $per = [
+            'per1' => $this->per1,
+            'per2' => $this->per2,
+            'per3' => $this->per3,
+            'per4' => $this->per4,
+        ];
+        $res = Plagiat::_info($per);
         if ($level == 'full' || $level == 'full+') {
             $res['id1'] = $this->id1;
             $res['id2'] = $this->id2;
