@@ -12,6 +12,10 @@ $this->title = 'My Yii Application';
         <p class="lead">
             Дипломної магістерської роботи 
             <a href="https://linkedin.com/in/slaawwa" target="_blank">Кушніра В.В.</a>
+            <p>
+                Керівник 
+                <a href="http://intellect.naeps.kpi.ua/profile/pva19" target="_blank">Порєв В.А.</a>
+            </p>
         </p>
 
     </div>
