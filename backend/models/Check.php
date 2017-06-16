@@ -41,9 +41,9 @@ class Check extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'doc' => 'Doc',
-            'body' => 'Body',
-            'created' => 'Created',
+            'doc' => 'Документ',
+            'body' => 'Підготовлений текст',
+            'created' => 'Створено',
         ];
     }
 }

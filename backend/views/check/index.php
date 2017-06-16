@@ -8,7 +8,7 @@ use yii\web\View;
 /* @var $searchModel app\models\CheckSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Checks';
+$this->title = 'Роботи перевірки';
 $this->params['breadcrumbs'][] = $this->title;
     // "$('#myButton').on('click', function() { alert('Button clicked!'); });",
 $this->registerJs(
@@ -26,7 +26,8 @@ $this->registerJs(
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Check', ['create'], ['class' => 'btn btn-success']) ?>
+        <?/* Html::a('Створити роботи перевірки', ['/'], ['class' => 'btn btn-success'])*/ ?>
+        <a class="btn btn-success" href="/">Створити роботи перевірки</a>
     </p>
 
     <?= GridView::widget([

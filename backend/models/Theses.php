@@ -49,9 +49,10 @@ class Theses extends \yii\db\ActiveRecord
         ];
         $keys = array_keys($asoc);
         $values = array_values($asoc);
-        foreach($words as $k => $word) {
+        foreach($words as /*$k =>*/ &$word) {
             if(preg_match('/[a-z]/is', $word) && preg_match('/[а-яієїґ]/isu', $word)) {
-                $words[$k] = str_replace($keys, $values, $word);
+                // $words[$k] = str_replace($keys, $values, $word);
+                $word = str_replace($keys, $values, $word);
             }
         }
         return $words;
