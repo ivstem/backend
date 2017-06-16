@@ -49,7 +49,11 @@ a.active {
     margin-bottom: 80px;
 }
 
-.mdl-textfield {
+.mdl-textfield--expandable .mdl-button--icon {
+    top: 6px;
+}
+
+.mdl-my-textarea {
     width: 100%;
 }
 

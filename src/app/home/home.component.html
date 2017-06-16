@@ -6,7 +6,7 @@
 
         <form (ngSubmit)="submitState()" autocomplete="off">
 
-            <div class="mdl-textfield mdl-js-textfield">
+            <div class="mdl-textfield mdl-js-textfield mdl-my-textarea">
                 <textarea
                     [value]="localState.value"
                     (input)="localState.value = $event.target.value"
