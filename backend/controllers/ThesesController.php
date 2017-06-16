@@ -170,6 +170,38 @@ class ThesesController extends Controller
         $res = $these->checkThese($force);
         return $this->redirect(['view', 'id'=>$id]);
     }
+    
+    public function actionUa($text) {
+        // $text1 = Theses::_engUaWold($text);
+        $text1 = Theses::_engUaWolds([$text]);
+        var_dump($text);
+        var_dump($text1);
+        die();
+    }
+    
+    public function actionEnd1($text) {
+        $text1 = Theses::_doc2body($text);
+        var_dump($text1);
+    }
+    
+    public function actionEnd($text) {
+        // $completions = "/[ок|ій|я|нь|нь|ой|а]\s/iu";
+        $completions = '/(e|ю|а|и|і|о|й|у|я|ою|ой|ий|ом|ів|ій|ня|их|ах|еї|ею|єю|ою|ая|ові|еві|ем|єм|нь|ок)\s/iu';
+        
+        // Строка, в которой заменяем
+        $string = 'Це рядок, в якій потрібно відрізати у слів закінчення, які вказані в масиві закінчень';
+        
+        var_dump($string);
+        // Удаляем окончания
+        $string = preg_replace($completions, " ", "$string ");
+        
+        var_dump($string);
+        
+        $text1 = Theses::_dropBackWords($text);
+        var_dump($text);
+        var_dump($text1);
+        die();
+    }
 
     /**
      * Deletes an existing Theses model.

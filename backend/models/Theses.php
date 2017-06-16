@@ -26,20 +26,78 @@ class Theses extends \yii\db\ActiveRecord
     }
     
     /**
-     * @doc2body
+     * @_engUaWold
+     */
+    static function _engUaWold($body) {
+        return $body;
+    }
+    
+    /**
+     * @_engUaWolds
+     */
+    static function _engUaWolds($words) {
+        $asoc = [
+            // e | i | a | y | p | o | x | c
+            'e' => 'е',      'i' => 'і',
+            'a' => 'а',      'y' => 'у',
+            'p' => 'р',      'o' => 'о',
+            'x' => 'х',      'c' => 'с',
+            // B | T | K | H | M
+            'b' => 'в',      't' => 'т',
+            'k' => 'к',      'h' => 'н',
+            'm' => 'м',
+        ];
+        $keys = array_keys($asoc);
+        $values = array_values($asoc);
+        foreach($words as $k => $word) {
+            if(preg_match('/[a-z]/is', $word) && preg_match('/[а-яієїґ]/isu', $word)) {
+                $words[$k] = str_replace($keys, $values, $word);
+            }
+        }
+        return $words;
+    }
+    
+    /**
+     * @_dropBackWords
+     */
+    static function _dropBackWords($text) {
+        $pattern = '/(e|ю|а|и|і|о|й|у|я|ою|ой|ий|ом|ів|ій|ня|их|ах|еї|ею|єю|ою|ая|ові|еві|ем|єм|нь|ок)\s/iu';
+        $text = preg_replace($pattern, ' ', "$text ");
+        return $text;
+    }
+    
+    /**
+     * @_doc2body
      */
     static function _doc2body($doc) {
+        // Нижній регіст + UTF-8
         $body = mb_strtolower($doc, 'UTF-8');
+
+        // Видалити апострофи
         $body = preg_replace('/\'/', '', $body);
+
+        // Видалити службові символи
         $pattern = 'a-zа-яієїґ0-9';
         $body = mb_ereg_replace("[^$pattern]", ' ', $body);
+
+        // Видалити закінчення у слів
+        $body = Theses::_dropBackWords($body);
+
+        // Видалити слова менше 4-х символів
+        $body = preg_replace('/\s+/', ' ', $body);
+        $body = preg_replace('/\s/', '  ', $body);
+        $body = mb_ereg_replace('\s['.$pattern.']{1,3}\s', '', " $body ");
         $body = preg_replace('/\s+/', ' ', trim($body));
-        $body = preg_replace('/\s/', '  ', trim($body));
-        $body = mb_ereg_replace('\s['.$pattern.']{1,3}\s', ' ', " $body ");
-        $body = preg_replace('/\s+/', ' ', trim($body));
+
+        // Залишити тільки унікальні слова
         $body = explode(' ', $body);
         $body = array_unique($body);
+
+        // Перевірити на англо-україно вмісні слова
+        $body = Theses::_engUaWolds($body);
+        
         $body = join(' ', $body);
+        
         return $body;
     }
     
