@@ -18,7 +18,7 @@ class CheckSearch extends Check
     public function rules()
     {
         return [
-            [['id', 'created'], 'integer'],
+            [['id'/*, 'created'*/], 'integer'],
             [['doc', 'body'], 'safe'],
         ];
     }

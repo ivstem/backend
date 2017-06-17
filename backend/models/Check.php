@@ -14,6 +14,7 @@ use Yii;
  */
 class Check extends \yii\db\ActiveRecord
 {
+    static public $textUA = 'абвгдежзийклмнопрстуфхцчшщьєюяіїґ';
     /**
      * @inheritdoc
      */
@@ -32,6 +33,23 @@ class Check extends \yii\db\ActiveRecord
             [['doc', 'body'], 'string'],
             [['created'], 'integer'],
         ];
+    }
+    
+    static function getWord($text, $limit=5) {
+        if (str_word_count($text, 0, Check::$textUA) > $limit) {
+            $words = str_word_count($text, 2, Check::$textUA);
+            $pos = array_keys($words);
+            $text = substr($text, 0, $pos[$limit]-1) . '...';
+        }
+        return $text;
+    }
+    
+    public function getFirstWord($text=false, $limit=5)
+    {
+        if ($text === false) {
+            $text = $this->doc;
+        }
+        return Check::getWord($text);
     }
 
     /**

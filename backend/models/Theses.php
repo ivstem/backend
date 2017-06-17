@@ -173,6 +173,10 @@ class Theses extends \yii\db\ActiveRecord
         return $_all;
     }
     
+    
+    /**
+     * @check
+     */
     static function check($body1, $body2) {
         $mess = '';
         if (strlen($body1) > 200000 || strlen($body2) > 200000) {
@@ -199,6 +203,9 @@ class Theses extends \yii\db\ActiveRecord
         return $res;
     }
     
+    /**
+     * @getShingle
+     */
     static function getShingle($text, $n=3) {
         $shingles = [];
         $elements = explode(' ' , $text);

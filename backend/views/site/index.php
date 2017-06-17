@@ -3,6 +3,13 @@
 /* @var $this yii\web\View */
 
 $this->title = 'Адмін • kpi2day • IVSTEM';
+
+if ($_login) {
+    ?><script>sessionStorage.setItem('_login', 1)</script><?php
+} else {
+    ?><script>sessionStorage.removeItem('_login')</script><?php
+}
+
 ?>
 <div class="site-index">
 

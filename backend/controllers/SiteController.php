@@ -78,7 +78,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', [
+            '_login' => !Yii::$app->user->isGuest,
+        ]);
     }
 
     /**
@@ -91,14 +93,29 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            /*Yii::$app->response->cookies->add(new \yii\web\Cookie([
+                'name' => '_login',
+                'value' => 1,
+                'httpOnly' => false,
+            ]));*/
+            Yii::$app->session->setFlash('_login', 1);
             return $this->goBack();
         }
         return $this->render('login', [
             'model' => $model,
         ]);
+    }
+    
+    public function actionFromfront()
+    {
+        if (Yii::$app->user->isGuest) {
+            // Yii::$app->response->cookies->remove('_login');
+            return $this->redirect(['login']);
+        } else {
+            return $this->goHome();
+        }
     }
 
     /**
@@ -108,6 +125,8 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
+        // Yii::$app->response->cookies->remove('_login');
+        
         Yii::$app->user->logout();
 
         return $this->goHome();

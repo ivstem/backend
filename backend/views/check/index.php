@@ -10,7 +10,6 @@ use yii\web\View;
 
 $this->title = 'Роботи перевірки';
 $this->params['breadcrumbs'][] = $this->title;
-    // "$('#myButton').on('click', function() { alert('Button clicked!'); });",
 $this->registerJs(
     "$('.btn-edit').on('click', function() { 
         localStorage.edit = $(this).data('id');
@@ -37,8 +36,20 @@ $this->registerJs(
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'doc:ntext',
-            'body:ntext',
+            [
+                'attribute' => 'doc',
+                'format' => 'raw',
+                'value' => function($m) {
+                    return $m->getFirstWord();
+                },
+            ],
+            [
+                'attribute' => 'body',
+                'format' => 'raw',
+                'value' => function($m) {
+                    return $m->getFirstWord($m->body);
+                },
+            ],
             'created:datetime',
             [
                 'label' => 'Дії',
