@@ -42,8 +42,8 @@ AppAsset::register($this);
         // ['label' => 'Роботи перевірки', 'url' => ['/check']],
         // ['label' => 'Контакт', 'url' => ['/site/contact']],
     } else {
-        $menu[] = ['label' => 'Роботи студентів', 'url' => ['/theses']];
-        $menu[] = ['label' => 'Роботи перевірки', 'url' => ['/check']];
+        $menu[] = ['label' => 'Роботи студентів', 'url' => ['/theses/index']];
+        $menu[] = ['label' => 'Роботи перевірки', 'url' => ['/check/index']];
         $menu[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
