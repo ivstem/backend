@@ -30,10 +30,14 @@ class ThesesController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'view', 'create', 'delete', 'update'],
+                'only' => ['*'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'delete', 'update'],
+                        'actions' => [
+                            'index', 'view', 'create', 'delete', 
+                            'update', 'field', 'getbody', 'getbodyall',
+                            'checkall', 'checkbyid',
+                        ],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -67,7 +71,7 @@ class ThesesController extends Controller
         $model = $this->findModel($id);
         return $this->render('view', [
             'model' => $model,
-            'plagiat' => $model->plagiat()
+            'plagiat' => $model->plagiat(),
         ]);
     }
     

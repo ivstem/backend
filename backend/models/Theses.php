@@ -129,6 +129,7 @@ class Theses extends \yii\db\ActiveRecord
         $plagiat = Plagiat::find()
             ->orWhere(['id1' => $this->id])
             ->orWhere(['id2' => $this->id])
+            ->orderBy('(per1 + per2 + per3 + per4) DESC')
             ->all();
         return $plagiat; 
     }

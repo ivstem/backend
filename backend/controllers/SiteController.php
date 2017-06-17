@@ -95,12 +95,6 @@ class SiteController extends Controller
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            /*Yii::$app->response->cookies->add(new \yii\web\Cookie([
-                'name' => '_login',
-                'value' => 1,
-                'httpOnly' => false,
-            ]));*/
-            Yii::$app->session->setFlash('_login', 1);
             return $this->goBack();
         }
         return $this->render('login', [
@@ -111,7 +105,6 @@ class SiteController extends Controller
     public function actionFromfront()
     {
         if (Yii::$app->user->isGuest) {
-            // Yii::$app->response->cookies->remove('_login');
             return $this->redirect(['login']);
         } else {
             return $this->goHome();
