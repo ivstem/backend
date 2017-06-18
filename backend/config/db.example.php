@@ -20,7 +20,7 @@ switch ($_SERVER['SERVER_NAME']) {
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname='.$dbname,
+    'dsn' => 'mysql:host=localhost;dbname='.$dbName,
     'username' => $dbUser,
     'password' => $dbPass,
     'charset' => 'utf8',
