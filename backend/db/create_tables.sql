@@ -25,6 +25,8 @@ SET time_zone = "+00:00";
 --
 -- Структура таблиці `plagiat`
 --
+-- ./yii migrate/create create_plagiat_table --fields="id1:integer(11):notNull,id2:integer(11):notNull,per1:float:notNull,per2:float:notNull,per3:float:notNull,per4:float:notNull"
+--
 
 CREATE TABLE IF NOT EXISTS `plagiat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -42,6 +44,8 @@ CREATE TABLE IF NOT EXISTS `plagiat` (
 --
 -- Структура таблиці `theses`
 --
+-- ./yii migrate/create create_theses_table --fields="npp:string(50):notNull,subject:string(255):notNull,group:string(50):notNull,author:string(255):notNull,curator:string(255):notNull,doc:text:notNull,body:text:notNull"
+--
 
 CREATE TABLE IF NOT EXISTS `theses` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
@@ -58,6 +62,8 @@ CREATE TABLE IF NOT EXISTS `theses` (
 
 --
 -- Структура таблиці `check`
+--
+-- ./yii migrate/create create_check_table --fields="doc:text:notNull,body:text:notNull,created:integer(11):notNull"
 --
 
 CREATE TABLE IF NOT EXISTS `check` (
